@@ -10,7 +10,7 @@ function setPixelToWorldScale() {
   if (window.innerWidth / window.innerHeight < WORLD_WIDTH / WORLD_HEIGHT) {
     worldToPixelScale = window.innerWidth / WORLD_WIDTH;
   } else {
-    (worldToPixelScale = window), innerHeight / WORLD_HEIGHT;
+    worldToPixelScale = window.innerHeight / WORLD_HEIGHT;
   }
 
   worldEl.style.height = `${worldToPixelScale * WORLD_HEIGHT}px`;
