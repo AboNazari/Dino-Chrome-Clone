@@ -1,3 +1,5 @@
+import { ground, setupGround } from "./ground.js";
+
 const WORLD_HEIGHT = 30;
 const WORLD_WIDTH = 100;
 const worldEl = document.querySelector("[data-world]");
@@ -6,6 +8,7 @@ setPixelToWorldScale();
 window.addEventListener("resize", setPixelToWorldScale);
 
 // Update Loop: to update postion of very element on the screen based on the time frame recieved from the monitor
+setupGround();
 let lastTime;
 function update(time) {
   if (lastTime == null) {
@@ -16,6 +19,7 @@ function update(time) {
   const delta = time - lastTime;
   // console.log(delta);
   lastTime = time;
+  ground(delta);
   window.requestAnimationFrame(update);
 }
 window.requestAnimationFrame(update);
