@@ -8,7 +8,7 @@ import {
 const dinoElem = document.querySelector("[data-dino]");
 
 // Dino Constants
-const GRAVITY = 0.11;
+const GRAVITY = 0.015;
 const JUMP_SPEED = 0.45;
 const DinoFrameCount = 2;
 const FrameTime = 100;
@@ -29,7 +29,6 @@ export function setupDino() {
 export function updateDino(delta, speedScale) {
   handleJump(delta);
   handleRun(delta, speedScale);
-  console.log(delta);
 }
 
 function handleRun(delta, speedScale) {
@@ -41,7 +40,7 @@ function handleRun(delta, speedScale) {
   if (currentFrameTime >= FrameTime) {
     dinoFrame = (dinoFrame + 1) % DinoFrameCount;
     dinoElem.src = `./images/dino-run-${dinoFrame}.png`;
-    currentFrameTime = 0;
+    currentFrameTime -= FrameTime;
   }
   currentFrameTime += delta * speedScale;
 }
@@ -55,7 +54,9 @@ function handleJump(delta) {
     setCustomProperty(dinoElem, "--bottom", 0);
     isJumping = false;
   }
+
   yVelocity -= GRAVITY * delta;
+  console.log(yVelocity);
 }
 
 function doJump(e) {
