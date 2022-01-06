@@ -12,7 +12,7 @@ export function setupGround() {
   setCustomProperty(groundElems[1], "--left", 300);
 }
 
-export function ground(delta, SpeedScale) {
+export function updateGround(delta, SpeedScale) {
   groundElems.forEach((ground) => {
     incrementCustomProperty(ground, "--left", delta * Speed * SpeedScale * -1);
     if (getCustomProperty(ground, "--left") <= -300) {
