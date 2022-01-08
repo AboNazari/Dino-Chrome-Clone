@@ -5,7 +5,7 @@ import { updateCactus, setupCactus, getCactusRects } from "./cactus.js";
 // the constants
 const WORLD_HEIGHT = 30;
 const WORLD_WIDTH = 100;
-const SPEED_SCALE_INCREASE = 0.000001;
+const SPEED_SCALE_INCREASE = 0.00001;
 
 // the dom elements
 const worldEl = document.querySelector("[data-world]");
@@ -19,9 +19,9 @@ document.addEventListener("keydown", handleStart, { once: true });
 
 // Update Loop: to update postion of very element on the screen based on the time frame recieved from the monitor
 let lastTime;
-let score = 0;
+let score;
 let speedScale;
-// let waitTime;
+
 function update(time) {
   if (lastTime == null) {
     lastTime = time;
@@ -29,7 +29,6 @@ function update(time) {
     return;
   }
   const delta = time - lastTime;
-  lastTime = time;
 
   // calling the ground loop
   updateGround(delta, speedScale);
@@ -42,11 +41,12 @@ function update(time) {
   // update cactus
   updateCactus(delta, speedScale);
 
+  // calling Update score
+  updateScore(delta);
   // check lose
   if (checkLose()) return handleLose();
 
-  // calling Update score
-  updateScore(delta);
+  lastTime = time;
   window.requestAnimationFrame(update);
 }
 
@@ -84,7 +84,7 @@ function handleLose() {
 
   setTimeout(() => {
     document.addEventListener("keydown", handleStart, { once: true });
-    worldEl.classList.remove("hide");
+    startEl.classList.remove("hide");
   }, 100);
 }
 // update speed scale

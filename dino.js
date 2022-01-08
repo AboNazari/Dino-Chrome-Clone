@@ -62,16 +62,19 @@ function handleJump(delta) {
   yVelocity -= GRAVITY * delta;
 }
 
-export function getDinoRects() {
-  return dinoElem.getBoundingClientRect();
-}
-
-export function setDinoLose() {
-  dinoElem.src = "./images/dino-lose.png";
-}
 // set isJumping and listen to space click
 function onJump(e) {
   if (e.code !== "Space" || isJumping) return;
   yVelocity = JUMP_SPEED;
   isJumping = true;
+}
+
+// export dino rects
+export function getDinoRects() {
+  return dinoElem.getBoundingClientRect();
+}
+
+// change img for lose
+export function setDinoLose() {
+  dinoElem.src = "./images/dino-lose.png";
 }
