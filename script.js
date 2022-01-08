@@ -1,10 +1,11 @@
 import { updateGround, setupGround } from "./ground.js";
 import { updateDino, setupDino } from "./dino.js";
+import { updateCactus, setupCactus } from "./cactus.js";
 
 // the constants
 const WORLD_HEIGHT = 30;
 const WORLD_WIDTH = 100;
-const SPEED_SCALE_INCREASE = 0.00001;
+const SPEED_SCALE_INCREASE = 0.000001;
 
 // the dom elements
 const worldEl = document.querySelector("[data-world]");
@@ -40,7 +41,8 @@ function update(time) {
 
   // update speedScale
   updateSpeedScale(delta);
-
+  // update cactus
+  updateCactus(delta, speedScale);
   // calling Update score
   updateScore(delta);
 }
@@ -52,6 +54,7 @@ function handleStart() {
   score = 0;
   setupGround();
   setupDino();
+  setupCactus();
   startEl.classList.add("hide");
   window.requestAnimationFrame(update);
 }
