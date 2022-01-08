@@ -8,6 +8,7 @@ const SPEED = 0.05;
 const TIME_INTERVAL_MIN = 500;
 const TIME_INTERVAL_MAX = 2000;
 const worldElem = document.querySelector("[data-world]");
+
 let nextCactusTime;
 
 export function setupCactus() {

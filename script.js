@@ -1,6 +1,6 @@
 import { updateGround, setupGround } from "./ground.js";
-import { updateDino, setupDino } from "./dino.js";
-import { updateCactus, setupCactus } from "./cactus.js";
+import { updateDino, setupDino, getDinoRects, setDinoLose } from "./dino.js";
+import { updateCactus, setupCactus, getCactusRects } from "./cactus.js";
 
 // the constants
 const WORLD_HEIGHT = 30;
@@ -31,8 +31,6 @@ function update(time) {
   const delta = time - lastTime;
   lastTime = time;
 
-  window.requestAnimationFrame(update);
-
   // calling the ground loop
   updateGround(delta, speedScale);
 
@@ -43,8 +41,13 @@ function update(time) {
   updateSpeedScale(delta);
   // update cactus
   updateCactus(delta, speedScale);
+
+  // check lose
+  if (checkLose()) return handleLose();
+
   // calling Update score
   updateScore(delta);
+  window.requestAnimationFrame(update);
 }
 
 // start the key via a key press
@@ -59,6 +62,31 @@ function handleStart() {
   window.requestAnimationFrame(update);
 }
 
+// check lose
+function checkLose() {
+  const dinoRect = getDinoRects();
+  return getCactusRects().some((rect) => isCollision(rect, dinoRect));
+}
+
+// check collision
+function isCollision(rect1, rect2) {
+  return (
+    rect1.left < rect2.right &&
+    rect1.top < rect2.bottom &&
+    rect1.right > rect2.left &&
+    rect1.bottom > rect2.top
+  );
+}
+
+// handle lose
+function handleLose() {
+  setDinoLose();
+
+  setTimeout(() => {
+    document.addEventListener("keydown", handleStart, { once: true });
+    worldEl.classList.remove("hide");
+  }, 100);
+}
 // update speed scale
 function updateSpeedScale(delta) {
   speedScale += delta * SPEED_SCALE_INCREASE;
