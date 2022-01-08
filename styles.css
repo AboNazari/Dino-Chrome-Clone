@@ -39,15 +39,16 @@ body {
   --left: 0;
   position: absolute;
   width: 300%;
-  left: calc(var(--left) * 1%);
   bottom: 0;
+  left: calc(var(--left) * 1%);
 }
+
 .dino-stationary {
   --bottom: 0;
   position: absolute;
-  left: 3%;
-  bottom: calc(var(--bottom) * 1%);
+  left: 1%;
   height: 30%;
+  bottom: calc(var(--bottom) * 1%);
 }
 .cactus {
   position: absolute;

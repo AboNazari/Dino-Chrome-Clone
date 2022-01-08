@@ -4,8 +4,8 @@ import {
   incrementCustomProperty,
 } from "./updateCustomProperty.js";
 
-const groundElems = document.querySelectorAll("[data-ground]");
 const Speed = 0.05;
+const groundElems = document.querySelectorAll("[data-ground]");
 
 export function setupGround() {
   setCustomProperty(groundElems[0], "--left", 0);

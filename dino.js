@@ -8,7 +8,7 @@ import {
 const dinoElem = document.querySelector("[data-dino]");
 
 // Dino Constants
-const GRAVITY = 0.015;
+const GRAVITY = 0.0015;
 const JUMP_SPEED = 0.45;
 const DinoFrameCount = 2;
 const FrameTime = 100;
@@ -17,20 +17,25 @@ let isJumping;
 let dinoFrame;
 let currentFrameTime;
 let yVelocity;
+
+// setup dino and eventlisteners
 export function setupDino() {
   isJumping = false;
   dinoFrame = 0;
-  yVelocity = 0;
   currentFrameTime = 0;
+  yVelocity = 0;
   setCustomProperty(dinoElem, "--bottom", 0);
-  // document.removeEventListener("keydown", doJump);
-  document.addEventListener("keydown", doJump);
-}
-export function updateDino(delta, speedScale) {
-  handleJump(delta);
-  handleRun(delta, speedScale);
+  document.removeEventListener("keydown", onJump);
+  document.addEventListener("keydown", onJump);
 }
 
+// update dino: jump & run handler
+export function updateDino(delta, speedScale) {
+  handleRun(delta, speedScale);
+  handleJump(delta);
+}
+
+// run handler
 function handleRun(delta, speedScale) {
   if (isJumping) {
     dinoElem.src = "./images/dino-run-1.png";
@@ -45,22 +50,20 @@ function handleRun(delta, speedScale) {
   currentFrameTime += delta * speedScale;
 }
 
+// jump handler and adjusting it to GRAVITY and delta
 function handleJump(delta) {
   if (!isJumping) return;
-  console.log(delta);
-  incrementCustomProperty(dinoElem, "--bottom", yVelocity * delta);
 
+  incrementCustomProperty(dinoElem, "--bottom", yVelocity * delta);
   if (getCustomProperty(dinoElem, "--bottom") <= 0) {
     setCustomProperty(dinoElem, "--bottom", 0);
     isJumping = false;
   }
-
   yVelocity -= GRAVITY * delta;
-  console.log(yVelocity);
 }
 
-function doJump(e) {
-  console.log("jump");
+// set isJumping and listen to space click
+function onJump(e) {
   if (e.code !== "Space" || isJumping) return;
   yVelocity = JUMP_SPEED;
   isJumping = true;
