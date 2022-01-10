@@ -5,7 +5,7 @@ import { updateCactus, setupCactus, getCactusRects } from "./cactus.js";
 // the constants
 const WORLD_HEIGHT = 40;
 const WORLD_WIDTH = 100;
-const SPEED_SCALE_INCREASE = 0.00001;
+const SPEED_SCALE_INCREASE = 0.000001;
 
 // the dom elements
 const worldEl = document.querySelector("[data-world]");
