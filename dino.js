@@ -1,7 +1,7 @@
 import {
+  incrementCustomProperty,
   getCustomProperty,
   setCustomProperty,
-  incrementCustomProperty,
 } from "./updateCustomProperty.js";
 
 // Dino Element
@@ -52,8 +52,7 @@ function handleRun(delta, speedScale) {
 
 // jump handler and adjusting it to GRAVITY and delta
 function handleJump(delta) {
-  if (!isJumping) return;
-
+  // if (!isJumping) return;
   incrementCustomProperty(dinoElem, "--bottom", yVelocity * delta);
   if (getCustomProperty(dinoElem, "--bottom") <= 0) {
     setCustomProperty(dinoElem, "--bottom", 0);

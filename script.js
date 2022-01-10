@@ -3,7 +3,7 @@ import { updateDino, setupDino, getDinoRects, setDinoLose } from "./dino.js";
 import { updateCactus, setupCactus, getCactusRects } from "./cactus.js";
 
 // the constants
-const WORLD_HEIGHT = 30;
+const WORLD_HEIGHT = 40;
 const WORLD_WIDTH = 100;
 const SPEED_SCALE_INCREASE = 0.00001;
 
